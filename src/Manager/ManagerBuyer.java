@@ -20,7 +20,7 @@ public class ManagerBuyer{
         printListBuyers(Buyer[] buyers) {
         for (int i = 0; i < buyers.length; i++) {
             Buyer buyer = buyers[i];
-            System.out.printf(i+1 +" %s %n"
+            System.out.printf(i+1 +": %s %n"
                     ,buyer.getFirstname()
                     ,buyer.getLastname()
             );

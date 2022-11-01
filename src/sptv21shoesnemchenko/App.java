@@ -1,6 +1,5 @@
 package sptv21shoesnemchenko;
 
-
 import Entity.Buyer;
 import Entity.Shoes;
 import java.text.ParseException;
@@ -9,25 +8,25 @@ import java.util.Scanner;
 import Manager.ManagerBuyer;
 import Manager.ManagerShoes;
 
-
 public class App {
-    private Shoes[] shoes;
+
+    private Shoes[] shoeses;
     private Buyer[] buyers;
     private final ManagerBuyer managerBuyer;
     private final ManagerShoes managerShoes;
 
     public App() {
-        this.shoes = new Shoes[0];
+        this.shoeses = new Shoes[0];
         this.buyers = new Buyer[0];
         managerBuyer = new ManagerBuyer();
         managerShoes = new ManagerShoes();
 
     }
 
-    public void run() throws ParseException{
+    public void run() throws ParseException {
         boolean repeat = true;
         Scanner scanner = new Scanner(System.in);
-        do{
+        do {
             System.out.println("Список задач: ");
             System.out.println("1. Выход из программы");
             System.out.println("2. Добавить пару обуви");
@@ -47,18 +46,19 @@ public class App {
                     break;
                 case 2:
                     System.out.println("2. Добавить пару обуви");
-                    this.shoes = Arrays.copyOf(this.shoes, this.shoes.length+1);
-                    this.shoes[this.shoes.length-1] = managerShoes.addshoes();
+                    this.shoeses = Arrays.copyOf(this.shoeses, this.shoeses.length + 1);
+                    this.shoeses[this.shoeses.length - 1] = managerShoes.addshoes();
                     break;
                 case 3:
                     System.out.println("3. Cписок обуви");
-                    managerShoes.printListShoeses(shoes);
+                    managerShoes.printListShoeses(shoeses);
+                    break;
                 case 4:
                     System.out.println("4. Добавить покупателя");
-                    this.buyers =  Arrays.copyOf(this.buyers, this.buyers.length+1);
-                    this.buyers[this.buyers.length-1] = managerBuyer.createBuyer(); 
+                    this.buyers = Arrays.copyOf(this.buyers, this.buyers.length + 1);
+                    this.buyers[this.buyers.length - 1] = managerBuyer.createBuyer();
                     break;
-                
+
                 case 5:
                     System.out.println("5. Список покупателей");
                     System.out.println("Список покупателей");
@@ -70,13 +70,13 @@ public class App {
                     managerBuyer.printListBuyers(buyers);
                     int buy1 = scanner.nextInt();
                     System.out.println(" Список обуви: ");
-                    for(int j = 0; j< shoes.length; j++){
-                        System.out.println(j+1);
+                    for (int j = 0; j < shoeses.length; j++) {
+                        System.out.println(j + 1);
                     }
                     int buy2 = scanner.nextInt();
-                    int pur = buyers[buy1-1].getCash() - shoes[buy2-1].getPrice();
-                    buyers[buy1-1].setCash(pur);
-                    System.out.println("Остаток на счету "+pur);
+                    int pur = buyers[buy1 - 1].getCash() - shoeses[buy2 - 1].getPrice();
+                    buyers[buy1 - 1].setCash(pur);
+                    System.out.println("Остаток на счету " + pur);
 
                     break;
                 case 7:
@@ -84,19 +84,18 @@ public class App {
                     System.out.println("Выберите покупателя для зачисления mon$y");
                     System.out.println("Список покупателей");
                     managerBuyer.printListBuyers(buyers);
-                    int turn = scanner.nextInt(); scanner.nextLine();
+                    int turn = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.println("Сколько денег?");
-                    int addMoney = scanner.nextInt(); scanner.nextLine();
-                    int TotalMoney = buyers[turn -1].getCash()+ addMoney;
-                    buyers[turn -1].setCash(TotalMoney);
+                    int addMoney = scanner.nextInt();
+                    scanner.nextLine();
+                    int TotalMoney = buyers[turn - 1].getCash() + addMoney;
+                    buyers[turn - 1].setCash(TotalMoney);
                     break;
             }
-            System.out.println("=======================================");
-        }while(repeat);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        } while (repeat);
         System.out.println("Пока, guys!");
     }
-
-    
-    
 
 }

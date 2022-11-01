@@ -24,7 +24,7 @@ public class ManagerShoes {
         System.out.println("Обувь: ");
         for (int i = 0; i < shoes.length; i++) {
             Shoes product = shoes[i];
-            System.out.printf(i+1+"%s"
+            System.out.printf(i+1+": %s"
                     ,product.getShoesName());
         }
         System.out.println();
