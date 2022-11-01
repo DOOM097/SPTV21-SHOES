@@ -3,19 +3,19 @@ package Entity;
 import java.util.Date;
 
 public class History {
-    private Product product;
+    private Shoes shoes;
     private Buyer buyer;
-    private Date takeOnBook;
+    private Date BuyToShoes;
 
     public History() {
     }
 
-    public Product product() {
-        return product;
+    public Shoes shoes() {
+        return shoes;
     }
 
-    public History setProduct(Product product) {
-        this.product = product;
+    public History setShoes(Shoes shoes) {
+        this.shoes = shoes;
         return this;
     }
 
@@ -28,21 +28,21 @@ public class History {
         return this;
     }
 
-    public Date takeOnBook() {
-        return takeOnBook;
+    public Date BuyToShoes() {
+        return BuyToShoes;
     }
 
-    public History setTakeOnBook(Date takeOnBook) {
-        this.takeOnBook = takeOnBook;
+    public History setBuyToShoes(Date BuyToShoes) {
+        this.BuyToShoes = BuyToShoes;
         return this;
     }
 
     @Override
     public String toString() {
         return "History{" +
-                "product=" + product +
+                "shoes=" + shoes +
                 ", buyer=" + buyer +
-                ", takeOnBook=" + takeOnBook +
+                ", BuyToShoes=" + BuyToShoes +
                 '}';
     }
 }

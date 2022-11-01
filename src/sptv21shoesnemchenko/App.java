@@ -2,25 +2,25 @@ package sptv21shoesnemchenko;
 
 
 import Entity.Buyer;
-import Entity.Product;
+import Entity.Shoes;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import Manager.ManagerBuyer;
-import Manager.ManagerProduct;
+import Manager.ManagerShoes;
 
 
 public class App {
-    private Product[] products;
+    private Shoes[] shoes;
     private Buyer[] buyers;
     private final ManagerBuyer managerBuyer;
-    private final ManagerProduct managerProduct;
+    private final ManagerShoes managerShoes;
 
     public App() {
-        this.products = new Product[0];
+        this.shoes = new Shoes[0];
         this.buyers = new Buyer[0];
         managerBuyer = new ManagerBuyer();
-        managerProduct = new ManagerProduct();
+        managerShoes = new ManagerShoes();
 
     }
 
@@ -39,7 +39,7 @@ public class App {
             System.out.println("7. Выдача денег покупателю");
             int task = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("=====================================");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             switch (task) {
                 case 0:
                     repeat = false;
@@ -47,13 +47,14 @@ public class App {
                     break;
                 case 2:
                     System.out.println("2. Добавить пару обуви");
-                    this.products = Arrays.copyOf(this.products, this.products.length+1);
-                    this.products[this.products.length-1] = managerProduct.addproduct();
+                    this.shoes = Arrays.copyOf(this.shoes, this.shoes.length+1);
+                    this.shoes[this.shoes.length-1] = managerShoes.addshoes();
                     break;
                 case 3:
-                    managerProduct.printListProducts(products);
+                    System.out.println("3. Cписок обуви");
+                    managerShoes.printListShoeses(shoes);
                 case 4:
-                    System.out.println("3. Добавить покупателя");
+                    System.out.println("4. Добавить покупателя");
                     this.buyers =  Arrays.copyOf(this.buyers, this.buyers.length+1);
                     this.buyers[this.buyers.length-1] = managerBuyer.createBuyer(); 
                     break;
@@ -69,13 +70,13 @@ public class App {
                     managerBuyer.printListBuyers(buyers);
                     int buy1 = scanner.nextInt();
                     System.out.println(" Список обуви: ");
-                    for(int j = 0; j< products.length; j++){
+                    for(int j = 0; j< shoes.length; j++){
                         System.out.println(j+1);
                     }
                     int buy2 = scanner.nextInt();
-                    int pur = buyers[buy1-1].getCash() - products[buy2-1].getPrice();
+                    int pur = buyers[buy1-1].getCash() - shoes[buy2-1].getPrice();
                     buyers[buy1-1].setCash(pur);
-                    System.out.println("Остаток на счету"+pur);
+                    System.out.println("Остаток на счету "+pur);
 
                     break;
                 case 7:

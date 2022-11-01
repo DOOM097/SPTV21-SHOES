@@ -15,10 +15,12 @@ public class ManagerBuyer{
         return buyer;
     }
 
-    public void printListBuyers(Buyer[] buyers) {
+    public 
+        void 
+        printListBuyers(Buyer[] buyers) {
         for (int i = 0; i < buyers.length; i++) {
             Buyer buyer = buyers[i];
-            System.out.printf(i+1+"%s %n"
+            System.out.printf(i+1 +" %s %n"
                     ,buyer.getFirstname()
                     ,buyer.getLastname()
             );
