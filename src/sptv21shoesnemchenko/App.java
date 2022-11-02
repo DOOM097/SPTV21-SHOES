@@ -1,101 +1,127 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sptv21shoesnemchenko;
 
-import Entity.Buyer;
-import Entity.Shoes;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
-import Manager.ManagerBuyer;
-import Manager.ManagerShoes;
+import Entity.Customer;
+import Entity.Shoes;
+import Entity.Purchase;
+import Managers.CustomerManager;
+import Managers.ShoesManager;
+import Managers.PurchaseManager;
 
+/**
+ *
+ * @author pupil
+ */
 public class App {
-
-    private Shoes[] shoeses;
-    private Buyer[] buyers;
-    private final ManagerBuyer managerBuyer;
-    private final ManagerShoes managerShoes;
+     private final Scanner scanner;
+    private final CustomerManager customerManager;
+    private final PurchaseManager purchaseManager;
+    private final ShoesManager shoesManager;
+    private Purchase[] purchases;
+    private Customer[] customers;
+    private Shoes[] shoes;
+    
 
     public App() {
-        this.shoeses = new Shoes[0];
-        this.buyers = new Buyer[0];
-        managerBuyer = new ManagerBuyer();
-        managerShoes = new ManagerShoes();
-
+        scanner = new Scanner(System.in);
+        customerManager = new CustomerManager();
+        purchaseManager = new PurchaseManager();
+        shoesManager = new ShoesManager();
+        
+        purchases = new Purchase[0];
+        customers = new Customer[0];
+        shoes = new Shoes[0];
     }
-
-    public void run() throws ParseException {
+    
+    public void run(){
         boolean repeat = true;
-        Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.println("Список задач: ");
-            System.out.println("1. Выход из программы");
-            System.out.println("2. Добавить пару обуви");
-            System.out.println("3. Список обуви");
-            System.out.println("4. Добавить покупателя");
-            System.out.println("5. Список покупателей");
-            System.out.println("6. Покупка обуви");
-            //System.out.println("7. Оборот магазина");
-            System.out.println("7. Выдача денег покупателю");
+        do{
+            System.out.println("Функции приложения:");
+            System.out.println("0. Выход из программы");
+            System.out.println("1. Добавить пару обуви");
+            System.out.println("2. Список продавемых пар обуви");
+            System.out.println("3. Добавить покупателя");
+            System.out.println("4. Список зарегистрированных покупателей");
+            System.out.println("5. Покупка покупателем обуви");
+            System.out.println("6. Оборот магазина за все время работы");
+            System.out.println("7. Добавить денег покупателю");
+            System.out.print("Выберите номер функции: ");
             int task = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            switch (task) {
+            switch (task){
                 case 0:
                     repeat = false;
-                    System.out.println("1. Выход из программы");
+                    break;
+                case 1:
+                    System.out.println("1. Добавить пару обуви");
+                    addShoes(shoesManager.createShoes()) ;
                     break;
                 case 2:
-                    System.out.println("2. Добавить пару обуви");
-                    this.shoeses = Arrays.copyOf(this.shoeses, this.shoeses.length + 1);
-                    this.shoeses[this.shoeses.length - 1] = managerShoes.addshoes();
+                    System.out.println("2. Список продавемых пар обуви");
+                    shoesManager.printListShoes(shoes);
                     break;
                 case 3:
-                    System.out.println("3. Cписок обуви");
-                    managerShoes.printListShoeses(shoeses);
+                    System.out.println("3. Добавить покупателя");
+                    addCustomer(customerManager.createCustomer());
                     break;
                 case 4:
-                    System.out.println("4. Добавить покупателя");
-                    this.buyers = Arrays.copyOf(this.buyers, this.buyers.length + 1);
-                    this.buyers[this.buyers.length - 1] = managerBuyer.createBuyer();
+                    System.out.println("4. Список зарегистрированных покупателей");
+                    customerManager.printListCustomers(customers);
                     break;
-
                 case 5:
-                    System.out.println("5. Список покупателей");
-                    System.out.println("Список покупателей");
-                    managerBuyer.printListBuyers(buyers);
+                    System.out.println("5. Покупка покупателем обуви");
+                    addPurchase(purchaseManager.createPurchase(shoes, customers));
                     break;
                 case 6:
-                    System.out.println("6. Покупка обуви");
-                    System.out.println(" Список покупателей: ");
-                    managerBuyer.printListBuyers(buyers);
-                    int buy1 = scanner.nextInt();
-                    System.out.println(" Список обуви: ");
-                    for (int j = 0; j < shoeses.length; j++) {
-                        System.out.println(j + 1);
-                    }
-                    int buy2 = scanner.nextInt();
-                    int pur = buyers[buy1 - 1].getCash() - shoeses[buy2 - 1].getPrice();
-                    buyers[buy1 - 1].setCash(pur);
-                    System.out.println("Остаток на счету " + pur);
-
+                    System.out.println("6. Оборот магазина за все время работы");
+                    shopMoney();
                     break;
                 case 7:
-                    System.out.println("7. Добавление денег покупателю");
-                    System.out.println("Выберите покупателя для зачисления mon$y");
-                    System.out.println("Список покупателей");
-                    managerBuyer.printListBuyers(buyers);
-                    int turn = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Сколько денег?");
-                    int addMoney = scanner.nextInt();
-                    scanner.nextLine();
-                    int TotalMoney = buyers[turn - 1].getCash() + addMoney;
-                    buyers[turn - 1].setCash(TotalMoney);
+                    System.out.println("7. Добавить денег покупателю");
+                    customerManager.addBalance(customers);
                     break;
+                default:
+                    System.out.println("Выберите номер функции из списка!");
             }
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        } while (repeat);
-        System.out.println("Пока, guys!");
+        }while(repeat);
+        System.out.println("Пока!");
     }
-
+    
+    private void addCustomer(Customer customer){
+        customers = Arrays.copyOf(customers, customers.length + 1);
+        customers[customers.length - 1] = customer;
+    }
+     
+    private void addShoes(Shoes product){
+        shoes = Arrays.copyOf(shoes, shoes.length + 1);
+        shoes[shoes.length - 1] = product;
+    }
+    
+    private void addPurchase(Purchase purchase){
+        purchases = Arrays.copyOf(purchases, purchases.length + 1);
+        purchases[purchases.length - 1] = purchase;
+    }
+    
+    private void shopMoney() {
+        int shopMoney = 0; // беру цену из purchases
+//        int shopMoney = 0; // беру цену из product
+         for (Purchase purchase : purchases) {
+             shopMoney = shopMoney + purchase.getAmountCustomer() * purchase.getPriceCustomer();
+//            shopMoney = shopMoney + purchases[i].getAmountCustomer() * purchases[i].getShoes().getPrice();
+         }
+        System.out.printf("%nОборот магазина за все время работы: %d eur%n",shopMoney);
+        System.out.println();
+    }
 }
+
+
+   
+
+

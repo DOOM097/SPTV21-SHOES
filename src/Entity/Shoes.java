@@ -1,18 +1,44 @@
+
 package Entity;
 
-import java.util.Arrays;
-
 public class Shoes {
-    private String shoesName;
-    private String quantity;
+    private String title;
+    private String manufacturer;
+    private int amountShop;
     private int price;
 
-    public String getQuantity() {
-        return quantity;
+    public Shoes() {
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public Shoes(String title, String manufacturer, int amountShop, int price) {
+        this.title = title;
+        this.manufacturer = manufacturer;
+        this.amountShop = amountShop;
+        this.price = price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public int getAmountShop() {
+        return amountShop;
+    }
+
+    public void setAmountShop(int amountShop) {
+        this.amountShop = amountShop;
     }
 
     public int getPrice() {
@@ -23,26 +49,22 @@ public class Shoes {
         this.price = price;
     }
 
-    public Shoes() {
-    }
-
-    public String getShoesName() {
-        return shoesName;
-    }
-
-    public void setShoesName(String shoesName) {
-        this.shoesName= shoesName;
-    }
-
-
     @Override
     public String toString() {
-        return "Shoes{" +
-                "shoesName='" + shoesName + '\'' +
-                ", quantity='" + quantity + '\'' +
-                ", price=" + price +
-                '}';
+        return "Shoes{" 
+                + "title=" + title 
+                + ", manufacturer=" + manufacturer 
+                + ", amountShop=" + amountShop 
+                + ", price=" + price 
+                + '}';
     }
 
+    public Object[] getShoesName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    public void setShoesName(String nextLine) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
