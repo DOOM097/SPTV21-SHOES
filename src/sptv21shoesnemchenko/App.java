@@ -1,24 +1,13 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sptv21shoesnemchenko;
-
 import java.util.Arrays;
 import java.util.Scanner;
-import Entity.Customer;
-import Entity.Shoes;
-import Entity.Purchase;
-import Managers.CustomerManager;
-import Managers.ShoesManager;
-import Managers.PurchaseManager;
+import entity.Customer;
+import entity.Shoes;
+import entity.Purchase;
+import managers.CustomerManager;
+import managers.ShoesManager;
+import managers.PurchaseManager;
 
-/**
- *
- * @author pupil
- */
 public class App {
      private final Scanner scanner;
     private final CustomerManager customerManager;
@@ -28,7 +17,6 @@ public class App {
     private Customer[] customers;
     private Shoes[] shoes;
     
-
     public App() {
         scanner = new Scanner(System.in);
         customerManager = new CustomerManager();
@@ -110,18 +98,13 @@ public class App {
     }
     
     private void shopMoney() {
-        int shopMoney = 0; // беру цену из purchases
-//        int shopMoney = 0; // беру цену из product
+        int shopMoney = 0;
          for (Purchase purchase : purchases) {
              shopMoney = shopMoney + purchase.getAmountCustomer() * purchase.getPriceCustomer();
-//            shopMoney = shopMoney + purchases[i].getAmountCustomer() * purchases[i].getShoes().getPrice();
          }
         System.out.printf("%nОборот магазина за все время работы: %d eur%n",shopMoney);
         System.out.println();
     }
 }
-
-
-   
 
 
