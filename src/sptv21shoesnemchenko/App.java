@@ -1,12 +1,12 @@
 package sptv21shoesnemchenko;
 import java.util.Arrays;
 import java.util.Scanner;
-import entity.Customer;
-import entity.Shoes;
-import entity.Purchase;
-import managers.CustomerManager;
-import managers.ShoesManager;
-import managers.PurchaseManager;
+import Entity.Customer;
+import Entity.Shoes;
+import Entity.Purchase;
+import Managers.CustomerManager;
+import Managers.ShoesManager;
+import Managers.PurchaseManager;
 
 public class App {
      private final Scanner scanner;
